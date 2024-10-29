@@ -4,7 +4,7 @@ import {
   errorNotification,
 } from "../components/ToastNotification/Notification";
 
-const URL = "http://localhost:7000";
+const URL = "";
 export const fetchAllCourses = async (page = 0) => {
   try {
     const { data } = await axios.get(
