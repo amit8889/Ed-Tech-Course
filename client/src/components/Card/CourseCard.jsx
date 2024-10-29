@@ -2,13 +2,13 @@ import React, { useState ,useRef} from 'react';
 import CourseModel from '../Model/CourseModel.jsx';
 import './CourseCard.css';
 import {fetchCourseByID,fetchSubscribedCourseByID} from "../../http/api.js"
-const CourseCard = ({ course,email,handleEnrollToCourse,fetchEnrollCourse }) => {
+const CourseCard = ({ course,email,handleEnrollToCourse,isEnrolled }) => {
   const { title, createdAt,images, description, _id } = course;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const courseData = useRef(null);
 
   const openModal = async() => {
-    const data = fetchEnrollCourse ? await fetchCourseByID(_id):await fetchSubscribedCourseByID(_id,email)
+    const data = !isEnrolled ? await fetchCourseByID(_id):await fetchSubscribedCourseByID(_id,email)
     if(data){
       courseData.current = data
       setIsModalOpen(true)
@@ -26,7 +26,7 @@ const CourseCard = ({ course,email,handleEnrollToCourse,fetchEnrollCourse }) => 
         <p><strong>Created At:</strong> {formattedDate}</p>
         <p><strong>Description:</strong>{description?.slice(0, 100)}{description?.length > 100 ? '...' : ''}</p>
         <button className='view-details-btn' onClick={openModal}>View Details</button>
-        {fetchEnrollCourse && <button onClick={()=>handleEnrollToCourse(_id)}>Enroll Now</button>}
+        {!isEnrolled && <button onClick={()=>handleEnrollToCourse(_id)}>Enroll Now</button>}
       </div>
       {isModalOpen&&<CourseModel isOpen={isModalOpen} onClose={closeModal} courseData={courseData?.current} />}
     </div>

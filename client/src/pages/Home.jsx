@@ -65,7 +65,6 @@ const Home = () => {
           allCourses={courses}
           email={email}
           handleEnrollToCourse={handleEnrollToCourse}
-          fetchEnrollCourse={fetchEnrollCourse}
           setPage={setPage}
           page={page}
         />

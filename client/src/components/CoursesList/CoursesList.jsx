@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CourseCard from '../Card/CourseCard';
 import './CoursesList.css'; // Import the custom CSS file
 
-const CoursesList = ({ allCourses,email, getAllCourses,handleEnrollToCourse,fetchEnrollCourse,setPage,page }) => {
+const CoursesList = ({ allCourses,email, getAllCourses,handleEnrollToCourse,setPage,page }) => {
   
   const pageSize = 4;
 
@@ -26,7 +26,7 @@ const CoursesList = ({ allCourses,email, getAllCourses,handleEnrollToCourse,fetc
     <div className="courses-list-container">
       <div className="courses-grid">
         {allCourses?.courses && Array.isArray(allCourses.courses) && allCourses.courses.map((course, index) => (
-          <CourseCard key={index} course={course} email={email} handleEnrollToCourse={handleEnrollToCourse} fetchEnrollCourse={fetchEnrollCourse} />
+          <CourseCard key={index} course={course} isEnrolled={allCourses?.isEnrolled ?? false} email={email} handleEnrollToCourse={handleEnrollToCourse}/>
         ))}
       </div>
 

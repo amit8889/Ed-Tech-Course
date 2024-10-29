@@ -32,6 +32,7 @@ export const fetchSubscribedCourses = async (email, page) => {
       return {
         courses: data.courses,
         totalCount: data.totalCount,
+        isEnrolled:true
       };
     } else {
       errorNotification(data.message);
